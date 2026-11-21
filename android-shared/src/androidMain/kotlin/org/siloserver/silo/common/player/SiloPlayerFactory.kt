@@ -16,6 +16,7 @@ import androidx.media3.datasource.HttpDataSource
 import androidx.media3.exoplayer.DefaultRenderersFactory
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.Renderer
+import androidx.media3.exoplayer.mediacodec.MediaCodecAdapter
 import androidx.media3.exoplayer.mediacodec.MediaCodecSelector
 import androidx.media3.exoplayer.video.MediaCodecVideoRenderer
 import androidx.media3.exoplayer.video.VideoRendererEventListener
@@ -261,6 +262,9 @@ class SiloPlayerFactory(
                 enableFloatOutput: Boolean,
                 enableAudioTrackPlaybackParams: Boolean,
             ): AudioSink = audioSink
+
+            override fun getCodecAdapterFactory(): MediaCodecAdapter.Factory =
+                MatroskaFlacCodecAdapterFactory(super.getCodecAdapterFactory())
 
             override fun buildVideoRenderers(
                 context: Context,
